@@ -34,26 +34,35 @@
         font-size: 1.8rem;
     }
 
-    /* GALERÍA */
-    .galeria {
-        padding: 1rem;
-        text-align: center;
-    }
-    .imagenes {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-    .imagenes img {
-        width: 300px;
-        max-width: 100%;
+    /* CARRUSEL */
+    .carousel {
+        position: relative;
+        max-width: 900px;
+        margin: auto;
+        overflow: hidden;
         border-radius: 10px;
-        transition: transform 0.3s;
     }
-    .imagenes img:hover {
-        transform: scale(1.05);
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
     }
+    .carousel img {
+        width: 100%;
+        flex-shrink: 0;
+    }
+    .carousel button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
 
     /* LISTA DE ARCHIVOS */
     .file-list {
@@ -134,9 +143,6 @@
             flex-direction: column;
             align-items: flex-start;
         }
-        .imagenes img {
-            width: 100%;
-        }
     }
 </style>
 </head>
@@ -150,13 +156,17 @@
 </header>
 
 <section class="galeria">
-    <h2>Actividades Recientes</h2>
-    <div class="imagenes">
-        <img src="actividad1.jpg" alt="Actividad 1">
-        <img src="actividad2.jpg" alt="Actividad 2">
-        <img src="actividad3.jpg" alt="Actividad 3">
-        <img src="actividad4.jpg" alt="Actividad 4">
-        <img src="actividad5.jpg" alt="Actividad 5">
+    <h2 style="text-align:center;">Actividades Recientes</h2>
+    <div class="carousel">
+        <div class="carousel-track">
+            <img src="actividad1.jpg" alt="Actividad 1">
+            <img src="actividad2.jpg" alt="Actividad 2">
+            <img src="actividad3.jpg" alt="Actividad 3">
+            <img src="actividad4.jpg" alt="Actividad 4">
+            <img src="actividad5.jpg" alt="Actividad 5">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
     </div>
 </section>
 
@@ -174,6 +184,46 @@
 </footer>
 
 <script>
+    /* ----- CARRUSEL ----- */
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.next');
+    const prevButton = document.querySelector('.prev');
+    let currentIndex = 0;
+    let autoSlide;
+
+    function updateCarousel(index) {
+        track.style.transform = `translateX(-${index * 100}%)`;
+    }
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel(currentIndex);
+    }
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateCarousel(currentIndex);
+    }
+    function startAutoSlide() {
+        autoSlide = setInterval(nextSlide, 3000);
+    }
+    function stopAutoSlide() {
+        clearInterval(autoSlide);
+    }
+
+    nextButton.addEventListener('click', () => {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
+    prevButton.addEventListener('click', () => {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+    });
+
+    startAutoSlide();
+
+    /* ----- ARCHIVOS ----- */
     const files = [
         {name: 'Asistencia Entrada Día 4 Lunes', file: 'https://docs.google.com/spreadsheets/d/17SpwusAmuCqsXH7O2nnEkxcHqhUl5Qcq/preview'},
         {name: 'Asistencia Salida Día 4 Lunes', file: 'https://docs.google.com/spreadsheets/d/1P84ePAjbgTCu7EjMy9jJlxrgZIbEOiAu/preview'},
@@ -198,7 +248,6 @@
         const fileName = document.createElement("div");
         fileName.classList.add("file-name");
         fileName.textContent = `${Math.floor(index / 3) + 1}. ${file.name}`;
-
 
         const btnGroup = document.createElement("div");
         btnGroup.classList.add("btn-group");
@@ -230,4 +279,3 @@
 
 </body>
 </html>
-
