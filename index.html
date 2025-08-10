@@ -197,7 +197,8 @@
 
         const fileName = document.createElement("div");
         fileName.classList.add("file-name");
-        fileName.textContent = `${index + 1}. ${file.name}`;
+        fileName.textContent = `${Math.floor(index / 3) + 1}. ${file.name}`;
+
 
         const btnGroup = document.createElement("div");
         btnGroup.classList.add("btn-group");
@@ -229,3 +230,4 @@
 
 </body>
 </html>
+
