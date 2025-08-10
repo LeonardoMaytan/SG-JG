@@ -31,7 +31,7 @@
     }
     header h1 {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     /* GALERÍA */
@@ -49,6 +49,10 @@
         width: 300px;
         max-width: 100%;
         border-radius: 10px;
+        transition: transform 0.3s;
+    }
+    .imagenes img:hover {
+        transform: scale(1.05);
     }
 
     /* LISTA DE ARCHIVOS */
@@ -120,6 +124,7 @@
     @media (max-width: 768px) {
         header h1 {
             font-size: 1.2rem;
+            text-align: center;
         }
         .logo {
             height: 60px;
@@ -128,6 +133,9 @@
         .file-item {
             flex-direction: column;
             align-items: flex-start;
+        }
+        .imagenes img {
+            width: 100%;
         }
     }
 </style>
@@ -147,6 +155,8 @@
         <img src="actividad1.jpg" alt="Actividad 1">
         <img src="actividad2.jpg" alt="Actividad 2">
         <img src="actividad3.jpg" alt="Actividad 3">
+        <img src="actividad4.jpg" alt="Actividad 4">
+        <img src="actividad5.jpg" alt="Actividad 5">
     </div>
 </section>
 
@@ -174,7 +184,7 @@
         {name: 'Asistencia Entrada Día 7 Jueves', file: 'https://docs.google.com/spreadsheets/d/1hP6QP-gHTHKc05osKS2dT5P5bFSFwyGp/preview'},
         {name: 'Asistencia Salida Día 7 Jueves', file: 'https://docs.google.com/spreadsheets/d/1Zc4iSzLmZMHyLIu_cS3ljH24d0qTfeeZ/preview'},
         {name: 'Evidencias Día 7 Jueves', file: 'https://docs.google.com/spreadsheets/d/1SO_kqGF0PwyI_7qqg8pakvmeDOWGA9JZ/preview'},
-        {name: 'Asistencia Entrada Día 8 Viernes', file: 'https://docs.google.com/spreadsheets/d/1hsVsFve3oKUZqcJ7_4MouvIns69pmQpP/preview'},
+        {name: 'Asistencia Entrada Día 8 Viernes', file: 'https://docs.google.com/spreadsheets/d/1hsVsFve3oKUZqcJ7_4MouvIns69pmQp/preview'},
         {name: 'Asistencia Salida Día 8 Viernes', file: 'https://docs.google.com/spreadsheets/d/10OLk7RHzlndimYcnpq2ta4l_Ueumt-2Y/preview'},
         {name: 'Evidencias Día 8 Viernes', file: 'https://docs.google.com/spreadsheets/d/1qKfKrO5FgP9P6Zs4KpqSJzC3JovAv3vV/preview'}
     ];
