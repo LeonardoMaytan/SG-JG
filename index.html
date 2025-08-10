@@ -1,144 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Descargas - Semana de Gestión</title>
-  <style>
-    :root{ --accent:#0d6efd; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial }
-    body{ margin:0; background:#f6f7fb; color:#111 }
-    header{ background:var(--accent); color:#fff; padding:1rem; text-align:center }
-    header h1{ margin:0; font-size:1.25rem }
-    .container{ max-width:1000px; margin:20px auto; padding:16px }
-    .list{ display:grid; gap:10px }
-    .item{ display:flex; align-items:center; justify-content:space-between; background:#fff; padding:12px; border-radius:8px;
-          box-shadow:0 1px 3px rgba(0,0,0,0.06) }
-    .meta{ display:flex; gap:12px; align-items:center }
-    .icon{ width:44px; height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center;
-           background:#eef2ff; color:var(--accent); font-weight:700 }
-    .name{ font-weight:600 }
-    .actions{ display:flex; gap:8px; align-items:center }
-    .btn{ background:var(--accent); color:white; border:0; padding:8px 12px; border-radius:8px; text-decoration:none; cursor:pointer }
-    .btn.secondary{ background:#6c757d }
-    .note{ font-size:0.9rem; color:#555; margin-top:12px }
-    .small{ font-size:0.85rem; color:#666 }
-    footer{ text-align:center; color:#666; margin:28px 0 60px 0 }
-    @media (max-width:720px){
-      .item{ flex-direction:column; align-items:flex-start; gap:8px }
-      .actions{ width:100%; display:flex; justify-content:space-between }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentos Semana de Gestión - I.E. José Gálvez</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f4f4;
     }
-  </style>
+
+    /* Encabezado */
+    header {
+        background-color: #0d47a1;
+        color: white;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        flex-wrap: wrap;
+    }
+    header img {
+        height: 80px;
+        margin-right: 15px;
+    }
+    header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    /* Contenedor principal */
+    .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    .file-list {
+        flex: 1;
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        min-width: 250px;
+    }
+    .file-item {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .file-item:hover {
+        background: #f0f8ff;
+    }
+    .viewer {
+        flex: 2;
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        min-width: 300px;
+    }
+    iframe {
+        width: 100%;
+        height: 80vh;
+        border: none;
+    }
+
+    /* Galería de actividades */
+    main {
+        padding: 20px;
+    }
+    .galeria {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .galeria img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Footer */
+    footer {
+        background-color: #0d47a1;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        position: relative;
+        margin-top: 30px;
+    }
+    footer p {
+        margin: 5px 0;
+    }
+    .creador {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+        text-align: right;
+    }
+    .creador a {
+        color: #ffeb3b;
+        text-decoration: none;
+    }
+    .creador a:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
 <body>
-  <header>
-    <h1>📁 Descargas — Semana de Gestión</h1>
-  </header>
 
-  <main class="container">
-    <div class="small">Haz clic en <strong>Descargar (.xlsx)</strong> para bajar el archivo directamente. Si la descarga no funciona revisa los permisos en Google Drive (Cualquiera con el enlace — Lector).</div>
+<!-- Encabezado -->
+<header>
+    <img src="logo1.png" alt="Logo del colegio">
+    <h1>INSTITUCIÓN EDUCATIVA INTEGRADA JOSÉ GÁLVEZ</h1>
+</header>
 
-    <div id="list" class="list" aria-live="polite"></div>
+<!-- Lista de documentos y visor -->
+<div class="container">
+    <div class="file-list" id="file-list">
+        <!-- Lista generada automáticamente -->
+    </div>
+    <div class="viewer">
+        <iframe id="viewer-frame" src=""></iframe>
+    </div>
+</div>
 
-    <p class="note">Consejo: si prefieres PDF, cambia <code>format=xlsx</code> por <code>format=pdf</code> dentro del script (o pídeme que lo haga).</p>
-  </main>
+<!-- Actividades -->
+<main>
+    <h2>Actividades Realizadas</h2>
+    <div class="galeria">
+        <img src="actividad1.jpg" alt="Actividad 1">
+        <img src="actividad2.jpg" alt="Actividad 2">
+        <img src="actividad3.jpg" alt="Actividad 3">
+    </div>
+</main>
 
-  <footer>Creado por Leonardo · Página estática compatible con GitHub Pages</footer>
+<!-- Footer -->
+<footer>
+    <p>Dirección: Jr. Las Begonias (Secundaria) y Jr. Las Orquídeas (Primaria) Río Negro - Satipo</p>
+    <p>Cel: 964073785 | Email: <a href="mailto:jome95@hotmail.com" style="color: #ffeb3b;">jome95@hotmail.com</a></p>
+    <div class="creador">
+        Creado por: <strong>Leonardo David Maytan Quispe</strong> - Ingeniero de Sistemas <br>
+        <a href="https://www.facebook.com/leodavid.maytan" target="_blank">Facebook</a> | 
+        <a href="https://www.credly.com/users/leonardo-david-maytan-quispe/badges#credly" target="_blank">Credly</a>
+    </div>
+</footer>
 
-  <script>
-    // === TU LISTA (exactamente la que compartiste) ===
+<script>
     const files = [
-      {name: 'Asistencia Entrada Semana de Gestión -  Día 4 Lunes.xlsx', file: 'https://docs.google.com/spreadsheets/d/17SpwusAmuCqsXH7O2nnEkxcHqhUl5Qcq/preview'},
-      {name: 'Asistencia Salida Semana de Gestión -  Día 4 Lunes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1P84ePAjbgTCu7EjMy9jJlxrgZIbEOiAu/preview'},
-      {name: 'EVIDENCIAS - DÍA 4 LUNES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1AzkpgYDuf25E9ESnA1lgWMUbZqSqb5e1/preview'},
-      {name: 'Asistencia Entrada Semana de Gestión -  Día 5 Martes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1y5zP1axn-VQM3cazyP1TDyOV_ci_WY-R/preview'},
-      {name: 'Asistencia Salida Semana de Gestión -  Día 5 Martes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1bBlMdesIMNcFSOSZUUgy0lIa5aD512zH/preview'},
-      {name: 'EVIDENCIAS - DÍA 5 MARTES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1aeLmBhT2DxfO5TN32q8178r3t6KCSu8Y/preview'},
-      {name: 'Asistencia Entrada Semana de Gestión -  Día 7 Jueves.xlsx', file: 'https://docs.google.com/spreadsheets/d/1hP6QP-gHTHKc05osKS2dT5P5bFSFwyGp/preview'},
-      {name: 'Asistencia Salida Semana de Gestión -  Día 7 Jueves.xlsx', file: 'https://docs.google.com/spreadsheets/d/1Zc4iSzLmZMHyLIu_cS3ljH24d0qTfeeZ/preview'},
-      {name: 'EVIDENCIAS - DÍA 7 JUEVES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1SO_kqGF0PwyI_7qqg8pakvmeDOWGA9JZ/preview'},
-      {name: 'Asistencia Entrada Semana de Gestión -  Día 8 Viernes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1hsVsFve3oKUZqcJ7_4MouvIns69pmQpP/preview'},
-      {name: 'Asistencia Salida Semana de Gestión -  Día 8 Viernes.xlsx', file: 'https://docs.google.com/spreadsheets/d/10OLk7RHzlndimYcnpq2ta4l_Ueumt-2Y/preview'},
-      {name: 'EVIDENCIAS - DÍA 8 VIERNES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1qKfKrO5FgP9P6Zs4KpqSJzC3JovAv3vV/preview'}
+        {name: 'Asistencia Entrada Semana de Gestión -  Día 4 Lunes.xlsx', file: 'https://docs.google.com/spreadsheets/d/17SpwusAmuCqsXH7O2nnEkxcHqhUl5Qcq/preview'},
+        {name: 'Asistencia Salida Semana de Gestión -  Día 4 Lunes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1P84ePAjbgTCu7EjMy9jJlxrgZIbEOiAu/preview'},
+        {name: 'EVIDENCIAS - DÍA 4 LUNES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1AzkpgYDuf25E9ESnA1lgWMUbZqSqb5e1/preview'},
+        {name: 'Asistencia Entrada Semana de Gestión -  Día 5 Martes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1y5zP1axn-VQM3cazyP1TDyOV_ci_WY-R/preview'},
+        {name: 'Asistencia Salida Semana de Gestión -  Día 5 Martes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1bBlMdesIMNcFSOSZUUgy0lIa5aD512zH/preview'},
+        {name: 'EVIDENCIAS - DÍA 5 MARTES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1aeLmBhT2DxfO5TN32q8178r3t6KCSu8Y/preview'},
+        {name: 'Asistencia Entrada Semana de Gestión -  Día 7 Jueves.xlsx', file: 'https://docs.google.com/spreadsheets/d/1hP6QP-gHTHKc05osKS2dT5P5bFSFwyGp/preview'},
+        {name: 'Asistencia Salida Semana de Gestión -  Día 7 Jueves.xlsx', file: 'https://docs.google.com/spreadsheets/d/1Zc4iSzLmZMHyLIu_cS3ljH24d0qTfeeZ/preview'},
+        {name: 'EVIDENCIAS - DÍA 7 JUEVES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1SO_kqGF0PwyI_7qqg8pakvmeDOWGA9JZ/preview'},
+        {name: 'Asistencia Entrada Semana de Gestión -  Día 8 Viernes.xlsx', file: 'https://docs.google.com/spreadsheets/d/1hsVsFve3oKUZqcJ7_4MouvIns69pmQpP/preview'},
+        {name: 'Asistencia Salida Semana de Gestión -  Día 8 Viernes.xlsx', file: 'https://docs.google.com/spreadsheets/d/10OLk7RHzlndimYcnpq2ta4l_Ueumt-2Y/preview'},
+        {name: 'EVIDENCIAS - DÍA 8 VIERNES.xlsx', file: 'https://docs.google.com/spreadsheets/d/1qKfKrO5FgP9P6Zs4KpqSJzC3JovAv3vV/preview'}
     ];
 
-    // === Util: extraer ID de URL de Google Drive
-    function extractDriveId(url){
-      try{
-        // busca /d/ID/ patrón
-        const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if(m && m[1]) return m[1];
-        // si el enlace es el formato sharepoint? attempt another common format: id=...
-        const q = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-        if(q && q[1]) return q[1];
-        return null;
-      }catch(e){
-        return null;
-      }
-    }
+    const fileList = document.getElementById("file-list");
+    const viewerFrame = document.getElementById("viewer-frame");
 
-    // Construye URL de exportación (descarga directa) para Google Sheets
-    // tipo: 'xlsx' o 'pdf' -> modifica si necesitas otro formato
-    function buildExportUrl(rawUrl, type = 'xlsx'){
-      const id = extractDriveId(rawUrl);
-      if(!id) return null;
-      // Para Google Sheets -> export?format=xlsx
-      return `https://docs.google.com/spreadsheets/d/${id}/export?format=${encodeURIComponent(type)}`;
-    }
-
-    // Render lista con botón de descarga
-    const listEl = document.getElementById('list');
-
-    files.forEach((f, idx) => {
-      const item = document.createElement('div');
-      item.className = 'item';
-
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      const icon = document.createElement('div');
-      icon.className = 'icon';
-      icon.textContent = 'XLSX';
-      const name = document.createElement('div');
-      name.className = 'name';
-      name.textContent = `${idx+1}. ${f.name}`;
-      meta.appendChild(icon);
-      meta.appendChild(name);
-
-      const actions = document.createElement('div');
-      actions.className = 'actions';
-
-      // construir URL de descarga
-      const dlUrl = buildExportUrl(f.file, 'xlsx');
-
-      if(dlUrl){
-        const a = document.createElement('a');
-        a.className = 'btn';
-        a.href = dlUrl;
-        a.setAttribute('aria-label', `Descargar ${f.name}`);
-        // no garantizamos que download funcione con Google Drive, pero este enlace iniciará la descarga
-        a.textContent = '📥 Descargar (.xlsx)';
-        a.target = '_blank';
-        actions.appendChild(a);
-      } else {
-        const warn = document.createElement('div');
-        warn.className = 'small';
-        warn.textContent = 'Enlace inválido — revisar';
-        actions.appendChild(warn);
-      }
-
-      // Añadir opción para abrir el enlace original en nueva pestaña (si quieres)
-      const view = document.createElement('a');
-      view.className = 'btn secondary';
-      view.href = f.file;
-      view.target = '_blank';
-      view.textContent = '🔗 Ver';
-      actions.appendChild(view);
-
-      item.appendChild(meta);
-      item.appendChild(actions);
-      listEl.appendChild(item);
+    files.forEach((file, index) => {
+        const item = document.createElement("div");
+        item.classList.add("file-item");
+        item.textContent = `${index + 1}. ${file.name}`;
+        item.addEventListener("click", () => {
+            viewerFrame.src = file.file;
+        });
+        fileList.appendChild(item);
     });
 
-  </script>
+    // Cargar el primero por defecto
+    if (files.length > 0) {
+        viewerFrame.src = files[0].file;
+    }
+</script>
+
 </body>
 </html>
+
+
 
